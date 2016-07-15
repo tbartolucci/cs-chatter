@@ -1,0 +1,35 @@
+<html>
+<head>
+    <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha256-cCueBR6CsyA4/9szpPfrX3s49M9vUU5BgtiJj06wt/s=" crossorigin="anonymous"></script>
+<script src="/socket.io/socket.io.js"></script>
+</head>
+<body>
+<form id="chat_form">
+    <div id="chatters"></div>
+    <div id="chat_area"></div>
+    <br/>
+    <input id="chat_input"/>
+    <input id="chat_send" type="button" value="Send"/>
+</form>
+<script>
+    var socket = io.connect('http://localhost:8080');
+    socket.on('messages', function(data){
+        $("#chat_area").innerHTML += data;
+    });
+    $('#chat_send').click(function(e){
+        var message = $('#chat_input').val();
+        socket.emit('messages', message);
+    });
+
+    socket.on("add chatter", function(name){
+        var chatter = $('<li>'+name+'</li>').data('name', name);
+        $('#chatters').append(chatter);
+    });
+
+    socket.on("leave chatter", function(name){
+
+    });
+
+</script>
+</body>
+</html>

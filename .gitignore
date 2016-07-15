@@ -1,3 +1,9 @@
+#IDE
+.buildpath
+.settings
+.project
+.idea
+
 # Logs
 logs
 *.log
